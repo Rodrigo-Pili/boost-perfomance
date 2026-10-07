@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Boost Perfomance | Import Automotive Parts</title>
 <meta name="description" content="Acessórios importados para o seu carro. Peça pelo WhatsApp e receba em todo o Brasil.">
 <meta name="theme-color" content="#C9A227">
@@ -22,9 +22,23 @@
 <a class="skip" href="#produtos">Ir para os produtos</a>
 
 <header>
-  <div class="wrap bar">
+  <div class="bar">
     <a class="logo" href="#" data-brand></a>
-    <nav class="nav" aria-label="Principal">
+
+    <!-- Botão hambúrguer (visível só no mobile) -->
+    <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav-menu">
+      <!-- Ícone hambúrguer -->
+      <svg id="icon-menu" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/>
+      </svg>
+      <!-- Ícone fechar -->
+      <svg id="icon-close" viewBox="0 0 24 24" aria-hidden="true" style="display:none">
+        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+      </svg>
+    </button>
+
+    <nav class="nav" id="nav-menu" aria-label="Principal">
+      <a class="nav-link" href="#produtos">Produtos</a>
       <a class="nav-link" href="#sobre-nos">Sobre nós</a>
       <a class="nav-link" href="#como-comprar">Como comprar</a>
     <a class="btn ghost" data-wa href="#">WhatsApp</a>
@@ -87,6 +101,15 @@
     </div>
   </section>
 </main>
+
+<!-- Botão flutuante WhatsApp (mobile only) -->
+<a class="wa-float" id="wa-float" href="#" target="_blank" rel="noopener noreferrer"
+   aria-label="Falar no WhatsApp">
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+    <path d="M12 0C5.373 0 0 5.373 0 12c0 2.117.554 4.103 1.524 5.828L.057 23.854a.5.5 0 00.608.608l6.084-1.459A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.817 9.817 0 01-5.007-1.372l-.36-.214-3.713.89.907-3.623-.235-.373A9.816 9.816 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/>
+  </svg>
+</a>
 
 <footer>
   <div class="wrap">
@@ -153,7 +176,8 @@
     <!-- Rodapé inferior -->
     <div class="foot-bottom">
     <span>© <span id="ano"></span> <span data-brand></span></span>
-    <a id="insta" href="#" rel="noopener">Instagram</a>
+      <a id="insta" href="#" target="_blank" rel="noopener noreferrer">Instagram</a>
+    </div>
   </div>
 </footer>
 

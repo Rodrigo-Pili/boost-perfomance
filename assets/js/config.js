@@ -5,5 +5,6 @@ window.SITE = {
   whatsapp: "5511964064961",          // país + DDD + número, só dígitos
   instagram: "https://instagram.com/boostperfomance",
   msgPadrao: "Olá! Vim pelo site e gostaria de um orçamento.",
+  msgFlotuante: "Olá! Vi a Boost Performance e gostaria de saber mais sobre os produtos e acessórios disponíveis.",
   analyticsId: ""                      // opcional: ID do Google Analytics (G-XXXXXXX)
 };

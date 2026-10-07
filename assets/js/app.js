@@ -2,6 +2,7 @@
   "use strict";
   var S = window.SITE, P = window.PRODUTOS || [];
 
+  /* ── Helpers ─────────────────────────────────────────── */
   var esc = function (t) {
     var d = document.createElement("div");
     d.textContent = t;
@@ -29,6 +30,68 @@
   if (footInsta) footInsta.href = S.instagram;
   if (footSite)  footSite.href  = S.url;
 
+  /* ── Botão flutuante WhatsApp ────────────────────────── */
+  var waFloat = document.getElementById("wa-float");
+  if (waFloat) {
+    waFloat.href = wa(S.msgFlotuante || S.msgPadrao);
+  }
+
+  /* ── Menu hambúrguer ─────────────────────────────────── */
+  var toggle  = document.getElementById("menu-toggle");
+  var nav     = document.getElementById("nav-menu");
+  var iconMenu  = document.getElementById("icon-menu");
+  var iconClose = document.getElementById("icon-close");
+
+  function closeMenu() {
+    nav.classList.remove("open");
+    toggle.setAttribute("aria-expanded", "false");
+    toggle.setAttribute("aria-label", "Abrir menu");
+    iconMenu.style.display  = "";
+    iconClose.style.display = "none";
+  }
+
+  function openMenu() {
+    nav.classList.add("open");
+    toggle.setAttribute("aria-expanded", "true");
+    toggle.setAttribute("aria-label", "Fechar menu");
+    iconMenu.style.display  = "none";
+    iconClose.style.display = "";
+  }
+
+  if (toggle && nav) {
+    toggle.addEventListener("click", function () {
+      if (nav.classList.contains("open")) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    });
+
+    /* Fecha ao clicar em qualquer link/botão do nav */
+    nav.querySelectorAll("a").forEach(function (link) {
+      link.addEventListener("click", function () {
+        closeMenu();
+      });
+    });
+
+    /* Fecha ao pressionar Escape */
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && nav.classList.contains("open")) {
+        closeMenu();
+        toggle.focus();
+      }
+    });
+
+    /* Fecha ao clicar fora do nav (só mobile) */
+    document.addEventListener("click", function (e) {
+      if (nav.classList.contains("open") &&
+          !nav.contains(e.target) &&
+          !toggle.contains(e.target)) {
+        closeMenu();
+      }
+    });
+  }
+
   /* ── Vitrine de produtos ─────────────────────────────── */
   var ativos = P.filter(function (p) { return p.disponivel; });
 
@@ -40,7 +103,8 @@
       "<h3>" + esc(p.nome) + "</h3>" +
       '<p class="desc">' + esc(p.desc) + "</p>" +
       '<div class="price">' + brl(p.preco) + "</div>" +
-      '<a class="btn" href="' + wa("Olá! Quero pedir: " + p.nome) + '">Pedir</a></div></article>';
+      '<a class="btn" href="' + wa("Olá! Quero pedir: " + p.nome) + '" target="_blank" rel="noopener noreferrer">Pedir</a>' +
+      "</div></article>";
   }).join("");
 
   /* ── SEO: dados estruturados dos produtos ────────────── */
@@ -52,8 +116,11 @@
       return {
         "@type": "Product", name: p.nome, description: p.desc,
         image: p.img ? S.url + "/" + p.img : undefined,
-        offers: { "@type": "Offer", priceCurrency: "BRL", price: p.preco.toFixed(2),
-          availability: "https://schema.org/InStock" }
+        offers: {
+          "@type": "Offer", priceCurrency: "BRL",
+          price: p.preco.toFixed(2),
+          availability: "https://schema.org/InStock"
+        }
       };
     })
   });
