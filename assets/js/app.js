@@ -14,11 +14,22 @@
     return "https://wa.me/" + S.whatsapp + "?text=" + encodeURIComponent(msg);
   };
 
+  /* ── Bindings gerais ─────────────────────────────────── */
   document.querySelectorAll("[data-brand]").forEach(function (el) { el.textContent = S.marca; });
   document.querySelectorAll("[data-wa]").forEach(function (el) { el.href = wa(S.msgPadrao); });
   document.getElementById("insta").href = S.instagram;
   document.getElementById("ano").textContent = new Date().getFullYear();
 
+  /* ── Bindings do footer ──────────────────────────────── */
+  var footWa   = document.getElementById("foot-wa");
+  var footInsta = document.getElementById("foot-insta");
+  var footSite  = document.getElementById("foot-site");
+
+  if (footWa)    footWa.href    = wa(S.msgPadrao);
+  if (footInsta) footInsta.href = S.instagram;
+  if (footSite)  footSite.href  = S.url;
+
+  /* ── Vitrine de produtos ─────────────────────────────── */
   var ativos = P.filter(function (p) { return p.disponivel; });
 
   document.getElementById("grid").innerHTML = ativos.map(function (p) {
@@ -32,7 +43,7 @@
       '<a class="btn" href="' + wa("Olá! Quero pedir: " + p.nome) + '">Pedir</a></div></article>';
   }).join("");
 
-  /* SEO: dados estruturados dos produtos */
+  /* ── SEO: dados estruturados dos produtos ────────────── */
   var ld = document.createElement("script");
   ld.type = "application/ld+json";
   ld.textContent = JSON.stringify({
@@ -48,7 +59,7 @@
   });
   document.head.appendChild(ld);
 
-  /* Analytics opcional */
+  /* ── Analytics opcional ──────────────────────────────── */
   if (S.analyticsId) {
     var g = document.createElement("script");
     g.async = true;

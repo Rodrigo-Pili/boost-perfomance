@@ -52,16 +52,91 @@ h2{font:700 clamp(30px,5vw,44px)/1.05 var(--display);margin-bottom:8px}
 .cta{text-align:center}
 .cta p{color:var(--muted);margin:0 auto 28px;max-width:44ch}
 
-footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-size:14px}
-.foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+/* ─── FOOTER ─────────────────────────────────────────────────── */
+footer{border-top:1px solid var(--line);padding:48px 0 28px}
 
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+/* Bloco de contatos – grid horizontal no desktop */
+.foot-contacts{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:24px;
+  margin-bottom:40px;
+  padding-bottom:32px;
+  border-bottom:1px solid var(--line);
+}
 
-/* Navegação */
+/* Cada item de contato */
+.foot-contact{
+  display:flex;
+  align-items:flex-start;
+  gap:14px;
+  text-decoration:none;
+  color:var(--text);
+  padding:12px;
+  border-radius:6px;
+  transition:background .18s ease;
+}
+.foot-contact:hover{background:var(--surface)}
+.foot-contact.no-link{cursor:default}
+.foot-contact.no-link:hover{background:transparent}
+
+.foot-contact-icon{
+  flex-shrink:0;
+  width:40px;
+  height:40px;
+  border:1px solid var(--line);
+  border-radius:6px;
+  display:grid;
+  place-items:center;
+  color:var(--gold);
+  transition:border-color .18s ease, background .18s ease;
+}
+.foot-contact:hover .foot-contact-icon{
+  border-color:var(--gold);
+  background:var(--gold-dark);
+  color:#1a1405;
+}
+.foot-contact.no-link:hover .foot-contact-icon{
+  border-color:var(--line);
+  background:transparent;
+  color:var(--gold);
+}
+
+.foot-contact-icon svg{width:20px;height:20px;fill:currentColor}
+
+.foot-contact-text{}
+.foot-contact-label{
+  display:block;
+  font:700 13px var(--body);
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:2px;
+}
+.foot-contact-desc{
+  display:block;
+  font-size:14px;
+  color:var(--muted);
+  line-height:1.4;
+}
+
+/* Rodapé inferior – copyright + instagram */
+.foot-bottom{
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:10px;
+  color:var(--muted);
+  font-size:14px;
+  align-items:center;
+}
+.foot-bottom a{text-decoration:none;color:var(--muted)}
+.foot-bottom a:hover{color:var(--gold)}
+
+/* ─── NAVEGAÇÃO ────────────────────────────────────────────────── */
 .nav{display:flex;align-items:center;gap:20px}
 .nav-link{text-decoration:none;color:var(--muted);font-weight:600;font-size:16px}
 .nav-link:hover{color:var(--gold)}
-/* Compensa o header ao rolar até uma âncora */
 section[id]{scroll-margin-top:72px}
 
 /* Sobre nós */
@@ -76,14 +151,17 @@ section[id]{scroll-margin-top:72px}
 @media (min-width:820px){
   .about{grid-template-columns:1fr 1.2fr;gap:64px}
 }
+@media (max-width:600px){
+  .foot-contacts{grid-template-columns:1fr;gap:4px}
+  .foot-contact{padding:10px 8px}
+}
 @media (max-width:480px){
   .nav{gap:12px}
   .bar .btn{padding:8px 14px;font-size:14px}
   .nav-link{font-size:15px}
   .logo{font-size:22px}
-}
-
-@media (max-width:480px){
   .bar{height:auto;padding:10px 20px;flex-wrap:wrap;gap:8px}
   .nav{flex-wrap:wrap;gap:10px}
 }
+
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
